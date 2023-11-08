@@ -1,0 +1,19 @@
+{% render 'search_form', categories: categories, keyword: context.params.keyword, sort: sort %}
+
+<div class="bg-gray-100 flex items-center justify-center py-2">
+  <div class="w-11/12 sm:w-11/12 md:w-8/12 lg:w-6/12 bg-white px-6 py-2 rounded-lg shadow-sm">
+    results: {{ items.total_entries }}
+  </div>
+</div>
+
+<div class="bg-gray-100 flex items-center justify-center py-2">
+  <div class="w-11/12 sm:w-11/12 md:w-8/12 lg:w-6/12 bg-white p-6 rounded-lg shadow-sm">
+    {% liquid
+      for item in items.results
+        render 'items/card', item: item, query: query
+      else
+        render 'items/noresults'
+      endfor
+    %}
+</div>
+</div>

@@ -1,0 +1,33 @@
+liquid_raise_mode: true
+skip_elasticsearch: true
+search_indexes:
+- docs:
+    properties:
+      uuid:
+        type: keyword
+      title:
+        type: text
+        fields:
+          raw:
+            type: keyword
+      content:
+        type: text
+      published_at:
+        type: date
+      created_at:
+        type: date
+      price:
+        type: integer
+      category:
+        type: keyword
+      author:
+        type: object
+        properties:
+          uuid:
+            type: string
+          name:
+            type: text
+            analyzer: english
+            fields:
+              raw:
+                type: keyword

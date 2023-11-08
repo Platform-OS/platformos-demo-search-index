@@ -1,0 +1,41 @@
+{% assign inputclass = "w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" %}
+{% assign radioclass = "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" %}
+{% assign buttonclass = "hover:shadow-form rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none" %}
+
+<form method="post" action="/index/insert">
+  {% render 'authtoken' %}
+  <div class="flex">
+    category:
+    {% for c in categories %}
+      <div class="flex items-center mr-4">
+        <input type="radio" id="cat-{{c}}" name="payload[category]" value="{{c}}" class="{{radioclass}}"/>
+        <label for="cat-{{c}}" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{c}}</label>
+      </div>
+    {% endfor %}
+  </div>
+  <input name="payload[uuid]" type="hidden" value="{{'' | uuid}}"/>
+  <div>
+    <label for="published_at"> published_at </label>
+    <input name="payload[published_at]" type="text" value="{{ 'now' | to_date }}" class="{{ inputclass }}"/>
+  </div>
+  <div>
+    <label for="title"> title </label>
+      <input name="payload[title]" type="text" value="" class="{{ inputclass}}"/>
+  </div>
+  <div>
+    <label for="content">content</label>
+    <textarea name="payload[content]" value="" class="content {{ inputclass}}"></textarea>
+  </div>
+  <div>
+    <label for="author"> author </label>
+      <input name="payload[author][name]" type="text" value="" class="{{ inputclass}}"/>
+  </div>
+  <div>
+    <label for="price"> price </label>
+      <input name="payload[price]" type="number" value="" class="{{ inputclass }}"/>
+  </div>
+  <br />
+  <div>
+    <input type="submit" name="save" value="save" class="{{buttonclass}}"/>
+  </div>
+</form>

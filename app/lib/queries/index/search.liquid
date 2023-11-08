@@ -1,0 +1,22 @@
+{% parse_json sort_options %}
+{
+   "title-za": { "name": "title.raw", "order": "DESC" },
+   "title-az": { "name": "title.raw", "order": "ASC" },
+   "author-za": { "name": "author.name.raw", "order": "DESC" },
+   "author-az": { "name": "author.name.raw", "order": "ASC" },
+   "created_at_desc": { "name": "created_at", "order": "DESC" },
+   "created_at_asc": { "name": "created_at", "order": "ASC" },
+   "score": { "name": "_score", "order": "DESC" }
+}
+{% endparse_json %}
+
+{% assign sort = '[]' | parse_json | array_add: sort_options[sort_by] | compact %}
+
+{% if keyword != empty %}
+  {% assign sort = sort | array_add: sort_options['score'] %}
+{% endif %}
+
+{% liquid
+  graphql r = 'index/search', limit: 10, keyword: keyword, categories: categories, match_type: match_type, sort: sort
+  return r.documents_rc
+%}

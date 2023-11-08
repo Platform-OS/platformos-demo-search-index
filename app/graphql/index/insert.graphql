@@ -1,0 +1,7 @@
+mutation insert($payload: HashObject!, $id: ID!){
+  documents_insert_rc(
+    search_index: "docs"
+    id: $id,
+    document: $payload
+  )
+}

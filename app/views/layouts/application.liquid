@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="authenticity_token" name="csrf-param">
+    <meta content="{{ form_authenticity_token }}" name="csrf-token">
+
+    <title>IndexDemo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{{ 'css/app.css' | asset_url }}">
+  </head>
+
+  <body>
+    <ul class="flex">
+      <li class="mr-6">
+        <a class="text-gray-400" href="/">home</a>
+      </li>
+
+      <li class="mr-6">
+        {% if context.session.authorized %} <a class="text-gray-400" href="/items/new">new item</a> {% endif %}
+      </li>
+      <li class="mr-6">
+        {% if context.session.authorized %} <a class="text-gray-400" href="/sessions/off">logout</a> {% endif %}
+      </li>
+      <li class="mr-6">
+        {% unless context.session.authorized %} <a class="text-gray-400" href="/sessions/new">login</a> {% endunless %}
+      </li>
+    </ul>
+    <nav>
+    </nav>
+
+      {{ content_for_layout }}
+  </body>
+</html>

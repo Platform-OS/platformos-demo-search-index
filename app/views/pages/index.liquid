@@ -1,0 +1,8 @@
+{% liquid
+  function items = 'queries/index/search', limit: 10, keyword: context.params.keyword, categories: context.params.categories, match_type: context.params.match_type, sort_by: context.params.sort_by
+
+  assign categories = 'alpha,beta,gamma,delta' | split: ','
+  assign sort = 'title-az,title-za,author-az,author-za' | split: ','
+
+  render 'items/index', items: items, categories: categories, sort: sort
+%}

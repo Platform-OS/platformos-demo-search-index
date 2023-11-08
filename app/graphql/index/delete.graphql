@@ -1,0 +1,3 @@
+mutation clean($id: ID!) {
+  documents_delete_rc(search_index: "docs", id: $id)
+}

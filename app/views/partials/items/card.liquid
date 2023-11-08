@@ -1,0 +1,23 @@
+{% assign item = item.properties %}
+
+<div class="bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-black hover:border-2 transition-colors duration-300">
+  <div class="block font-sans text-base font-light leading-relaxed text-gray-700 antialiased">
+    <span class="px-2 py-1 text-xs font-normal text-gray-700 uppercase bg-gray-200 rounded-md dark:text-gray-800 dark:bg-gray-400 bg-opacity-40"> {{ item.category }} </span>
+    <div> author: {{ item.author.name }} </div>
+    <div> published: {{ item.published_at }} </div>
+    <h2 class="text-xl font-semibold mb-4">{{ item.title }}</h2>
+    <div class="block font-sans text-normal leading-snug tracking-normal text-blue-gray-900 antialiased"> {{ item.content }} </div>
+
+    <div class="block font-sans text-normal font-medium leading-snug tracking-normal text-blue-gray-900 antialiased"> {{ item.price | pricify }} </div>
+    <div class="text-xs"> id: {{ item.uuid }} </div>
+  </div>
+
+  {% if context.session.authorized %}
+  <form method="post" action="index/delete">
+    {% render 'authtoken' %}
+    <input type="hidden" name="_method" value="delete" />
+    <input type="hidden" name="id" value="{{item.uuid}}" />
+    <input type="submit" name="" value="delete" class="block w-full select-none rounded-lg bg-pink-500 py-3.5 px-7 text-center align-middle font-sans text-sm font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"/>
+  </form>
+  {% endif %}
+</div>

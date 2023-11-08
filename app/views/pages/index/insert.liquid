@@ -1,0 +1,15 @@
+---
+method: post
+---
+{% liquid
+  unless context.session.authorized
+    redirect_to '/sessions/new'
+    break
+  endunless
+
+  assign doc = context.params.payload
+  hash_assign doc['created_at'] = 'now' | to_time
+
+  graphql q = 'index/insert', payload: context.params.payload, id: context.params.payload.uuid
+  redirect_to '/'
+%}

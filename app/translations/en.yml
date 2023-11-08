@@ -1,0 +1,8 @@
+en:
+  app:
+    search:
+      sort:
+        author-az: Author A-Z
+        author-za: Author Z-A
+        title-az: Title A-Z
+        title-za: Title Z-A

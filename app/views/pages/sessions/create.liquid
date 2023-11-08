@@ -1,0 +1,12 @@
+---
+method: post
+---
+
+{% liquid
+  if context.params.password == ''
+     session authorized = true
+     redirect_to '/items/new'
+  else
+     redirect_to '/sessions/new'
+  endif
+%}
